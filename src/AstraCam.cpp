@@ -101,7 +101,7 @@ int main(int argc, char** argv)
 	listener.set_help_message(helpMessage);
 	//开始获取身体流
 	bodyStream.start();
-	//将放映机reader与(处理者)listener结合在一起
+	//将放映机reader与(处理者)listener结合在一起, 给Listener的爹绑定一个Reader
 	reader.add_listener(listener);
 	//获取骨架数据
 	astra::SkeletonProfile profile = bodyStream.get_skeleton_profile();

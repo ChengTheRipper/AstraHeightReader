@@ -178,7 +178,7 @@ void BodyVisualizer::processBodies(astra::Frame& frame)
 		{
 			jointPositions_.push_back(joint.depth_position());
 		}
-
+		//应该在这里获取所有的关节位置的世界坐标
 		update_body(body, jointScale);
 	}
 
@@ -354,6 +354,7 @@ void BodyVisualizer::clear_overlay()
 	overlayTexture_.update(overlayBuffer_.get());
 }
 
+//帧处理函数
 void BodyVisualizer::on_frame_ready(astra::StreamReader& reader, astra::Frame& frame)
 {
 

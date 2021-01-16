@@ -1,12 +1,10 @@
 ﻿  AstraCam.cpp
-  sfPen.cpp
   BodyVisualizer.cpp
-D:\CPP_Projects\AstraHeightReader\src\StreamProcessor\BodyVisualizer.cpp(394,28): warning C4244: “参数”: 从“int”转换到“float”，可能丢失数据
-D:\CPP_Projects\AstraHeightReader\src\StreamProcessor\BodyVisualizer.cpp(394,21): warning C4244: “参数”: 从“int”转换到“float”，可能丢失数据
-D:\CPP_Projects\AstraHeightReader\src\StreamProcessor\BodyVisualizer.cpp(398,22): warning C4244: “参数”: 从“const int”转换到“float”，可能丢失数据
-D:\CPP_Projects\AstraHeightReader\src\StreamProcessor\BodyVisualizer.cpp(398,19): warning C4244: “参数”: 从“const int”转换到“float”，可能丢失数据
-D:\CPP_Projects\AstraHeightReader\src\StreamProcessor\BodyVisualizer.cpp(424,54): warning C4244: “参数”: 从“const float”转换到“const int”，可能丢失数据
-D:\CPP_Projects\AstraHeightReader\src\StreamProcessor\BodyVisualizer.cpp(424,44): warning C4244: “参数”: 从“const float”转换到“const int”，可能丢失数据
+D:\CPP_Projects\AstraHeightReader\src\StreamProcessor\BodyVisualizer.cpp(395,28): warning C4244: “参数”: 从“int”转换到“float”，可能丢失数据
+D:\CPP_Projects\AstraHeightReader\src\StreamProcessor\BodyVisualizer.cpp(395,21): warning C4244: “参数”: 从“int”转换到“float”，可能丢失数据
+D:\CPP_Projects\AstraHeightReader\src\StreamProcessor\BodyVisualizer.cpp(399,22): warning C4244: “参数”: 从“const int”转换到“float”，可能丢失数据
+D:\CPP_Projects\AstraHeightReader\src\StreamProcessor\BodyVisualizer.cpp(399,19): warning C4244: “参数”: 从“const int”转换到“float”，可能丢失数据
+D:\CPP_Projects\AstraHeightReader\src\StreamProcessor\BodyVisualizer.cpp(425,54): warning C4244: “参数”: 从“const float”转换到“const int”，可能丢失数据
+D:\CPP_Projects\AstraHeightReader\src\StreamProcessor\BodyVisualizer.cpp(425,44): warning C4244: “参数”: 从“const float”转换到“const int”，可能丢失数据
   正在生成代码...
-  LINK : 没有找到 D:\CPP_Projects\AstraHeightReader\x64\Debug\AstraCam.exe 或上一个增量链接没有生成它；正在执行完全链接
   AstraCam.vcxproj -> D:\CPP_Projects\AstraHeightReader\x64\Debug\AstraCam.exe
