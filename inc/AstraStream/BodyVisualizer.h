@@ -18,7 +18,6 @@ public:
 
 	void init_depth_texture(int width, int height);
 
-
 	void init_overlay_texture(int width, int height);
 
 	void check_fps();

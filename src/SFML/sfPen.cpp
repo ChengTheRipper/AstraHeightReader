@@ -1,4 +1,4 @@
-﻿#include "sfPen.h"
+﻿#include "../../inc/SFML/sfPen.h"
 
 void sfLine::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {

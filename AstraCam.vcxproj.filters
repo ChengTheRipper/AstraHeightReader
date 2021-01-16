@@ -13,27 +13,42 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="头文件\STD">
+      <UniqueIdentifier>{149c5f39-9ad3-40db-a41f-1247a10fc10d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\SFML">
+      <UniqueIdentifier>{179582e5-45fa-4ada-b8dd-1f5643d50dc1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\StreamProcessor">
+      <UniqueIdentifier>{0d075056-6797-42e8-b4e1-537844d68d9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\SFML">
+      <UniqueIdentifier>{f166b365-5ed2-48dd-8eee-81acd3d336e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\StreamProcessor">
+      <UniqueIdentifier>{3df3e341-6052-49d5-881e-13f64447a72f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AstraCam.cpp">
+    <ClCompile Include="src\AstraCam.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="sfPen.cpp">
-      <Filter>源文件</Filter>
+    <ClCompile Include="src\StreamProcessor\BodyVisualizer.cpp">
+      <Filter>源文件\StreamProcessor</Filter>
     </ClCompile>
-    <ClCompile Include="BodyVisualizer.cpp">
-      <Filter>源文件</Filter>
+    <ClCompile Include="src\SFML\sfPen.cpp">
+      <Filter>源文件\SFML</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="sfPen.h">
-      <Filter>头文件</Filter>
+    <ClInclude Include="inc\AstraStream\BodyVisualizer.h">
+      <Filter>头文件\StreamProcessor</Filter>
     </ClInclude>
-    <ClInclude Include="BodyVisualizer.h">
-      <Filter>头文件</Filter>
+    <ClInclude Include="inc\SFML\sfPen.h">
+      <Filter>头文件\SFML</Filter>
     </ClInclude>
-    <ClInclude Include="std_includes.h">
-      <Filter>头文件</Filter>
+    <ClInclude Include="inc\STD\std_includes.h">
+      <Filter>头文件\STD</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
