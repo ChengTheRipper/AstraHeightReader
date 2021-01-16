@@ -18,5 +18,22 @@
     <ClCompile Include="AstraCam.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="sfPen.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="BodyVisualizer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="sfPen.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="BodyVisualizer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="std_includes.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
