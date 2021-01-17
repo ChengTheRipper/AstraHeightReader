@@ -104,6 +104,7 @@ void BodyVisualizer::init_overlay_texture(int width, int height)
 		overlaySprite_.setPosition(0, 0);
 	}
 }
+
 void BodyVisualizer::check_fps()
 {
 	double fpsFactor = 0.02;

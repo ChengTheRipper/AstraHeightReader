@@ -39,6 +39,9 @@
     <ClCompile Include="src\SFML\sfPen.cpp">
       <Filter>源文件\SFML</Filter>
     </ClCompile>
+    <ClCompile Include="src\StreamProcessor\HeightCal.cpp">
+      <Filter>源文件\StreamProcessor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="inc\AstraStream\BodyVisualizer.h">
@@ -49,6 +52,9 @@
     </ClInclude>
     <ClInclude Include="inc\STD\std_includes.h">
       <Filter>头文件\STD</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\StreamProcessor\HeightCal.h">
+      <Filter>头文件\StreamProcessor</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

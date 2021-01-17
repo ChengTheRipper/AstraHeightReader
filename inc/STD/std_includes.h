@@ -5,6 +5,8 @@
 //内存管理
 #include <memory>
 
+//算法类
+#include <algorithm>
 //流对象
 #include <sstream>
 #include <iostream>

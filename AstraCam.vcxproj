@@ -22,11 +22,13 @@
     <ClCompile Include="src\AstraCam.cpp" />
     <ClCompile Include="src\SFML\sfPen.cpp" />
     <ClCompile Include="src\StreamProcessor\BodyVisualizer.cpp" />
+    <ClCompile Include="src\StreamProcessor\HeightCal.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="inc\AstraStream\BodyVisualizer.h" />
     <ClInclude Include="inc\SFML\sfPen.h" />
     <ClInclude Include="inc\STD\std_includes.h" />
+    <ClInclude Include="inc\StreamProcessor\HeightCal.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
