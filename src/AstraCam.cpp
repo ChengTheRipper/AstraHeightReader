@@ -16,6 +16,8 @@
 // Be excellent to each other.
 #include "../inc/AstraStream/BodyVisualizer.h"
 #include "../inc/SFML/sfPen.h"
+
+//我是李宇春
 astra::DepthStream configure_depth(astra::StreamReader& reader)
 {
 	auto depthStream = reader.stream<astra::DepthStream>();
