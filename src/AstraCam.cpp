@@ -17,7 +17,7 @@
 #include "../inc/AstraStream/BodyVisualizer.h"
 #include "../inc/SFML/sfPen.h"
 
-//我是吴彦祖
+//我是梁朝伟
 
 astra::DepthStream configure_depth(astra::StreamReader& reader)
 {
