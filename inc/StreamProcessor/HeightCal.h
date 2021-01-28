@@ -1,7 +1,8 @@
 ﻿#pragma once
-#include "../AstraStream/BodyVisualizer.h"
 #include "../STD/std_includes.h"
 #include <astra/Vector3f.hpp>
+#include <astra/astra.hpp>
+
 
 /*
 * HeightCal类
@@ -22,6 +23,7 @@ public:
 	{
 	}
 
+	double GetBodyHeight();
 private:
 	//计算关节长度
 	double BoneLength(const astra::Joint& j1, const astra::Joint& j2) const;
@@ -30,7 +32,6 @@ private:
 	//判断该追踪哪条腿
 	size_t Leg2Choose();
 	//测量人物高度
-	double GetBodyHeight();
 	astra::JointList joint_list_;
 
 };

@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include "../../inc/STD/std_includes.h"
 #include "../SFML/sfPen.h"
+#include "../StreamProcessor/HeightCal.h"
 
 #include <astra/astra.hpp>
 
@@ -26,6 +27,7 @@ public:
 
 	void processBodies(astra::Frame& frame);
 
+	void processHeight();
 
 	void update_body(astra::Body body, const float jointScale);
 

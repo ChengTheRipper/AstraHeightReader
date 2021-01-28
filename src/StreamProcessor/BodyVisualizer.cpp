@@ -184,20 +184,22 @@ void BodyVisualizer::processBodies(astra::Frame& frame)
 	}
 
 	const auto& floor = bodyFrame.floor_info(); //floor
-	if (floor.floor_detected())
+	/*if (floor.floor_detected())
 	{
 		const auto& p = floor.floor_plane();
 		std::cout << "Floor plane: ["
 			<< p.a() << ", " << p.b() << ", " << p.c() << ", " << p.d()
 			<< "]" << std::endl;
 
-	}
+	}*/
 
 	const auto& bodyMask = bodyFrame.body_mask();
 	const auto& floorMask = floor.floor_mask();
 
 	update_overlay(bodyMask, floorMask);
 }
+
+
 
 void BodyVisualizer::update_body(astra::Body body, const float jointScale)
 {
@@ -208,6 +210,13 @@ void BodyVisualizer::update_body(astra::Body body, const float jointScale)
 		return;
 	}
 
+
+	//在此处尝试进行身高运算
+	HeightCal h_cal(joints);
+	double height = h_cal.GetBodyHeight();
+	if (fabs(height - -1.0) < 0.01)
+		return;
+	printf("current body height %lf\n", height);
 	for (const auto& joint : joints)
 	{
 		astra::JointType type = joint.type();
@@ -359,7 +368,7 @@ void BodyVisualizer::clear_overlay()
 void BodyVisualizer::on_frame_ready(astra::StreamReader& reader, astra::Frame& frame)
 {
 
-	check_fps();
+	//check_fps();
 	if (isPaused_) { return; }
 
 	processDepth(frame);
