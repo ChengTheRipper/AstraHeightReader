@@ -78,8 +78,14 @@ public:
 
 	void toggle_help();
 
-
 	void set_help_message(const char* msg);
+
+
+	double GetHeight();
+	bool   bheight_ready_;
+	//身高
+	std::vector<double>  height_vec_;
+
 
 private:
 	long double frameDuration_{ 0 };
@@ -115,4 +121,6 @@ private:
 	bool isMouseOverlayEnabled_{ true };
 	bool isFullHelpEnabled_{ false };
 	const char* helpMessage_{ nullptr };
+
+
 };

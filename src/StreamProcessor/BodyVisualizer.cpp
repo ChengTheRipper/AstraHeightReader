@@ -214,9 +214,20 @@ void BodyVisualizer::update_body(astra::Body body, const float jointScale)
 	//在此处尝试进行身高运算
 	HeightCal h_cal(joints);
 	double height = h_cal.GetBodyHeight();
-	if (fabs(height - -1.0) < 0.01)
-		return;
-	printf("current body height %lf\n", height);
+	if (bheight_ready_ == false)
+	{
+		if (fabs(height - -1.0) < 0.01)
+			return;
+		else
+		{
+			height_vec_.push_back(height);
+			if (height_vec_.size() == 10)//获取到了足够的数据
+				bheight_ready_ = true;
+			printf("current body height %lf\n", height);
+		}
+	}
+
+
 	for (const auto& joint : joints)
 	{
 		astra::JointType type = joint.type();
@@ -437,24 +448,24 @@ void BodyVisualizer::draw_help_message(sf::RenderWindow& window) const
 
 void BodyVisualizer::draw_to(sf::RenderWindow& window)
 {
-	if (displayBuffer_ != nullptr)
-	{
-		const float scaleX = window.getView().getSize().x / depthWidth_;
-		const float scaleY = window.getView().getSize().y / depthHeight_;
-		sprite_.setScale(scaleX, scaleY);
+	//if (displayBuffer_ != nullptr)
+	//{
+	//	const float scaleX = window.getView().getSize().x / depthWidth_;
+	//	const float scaleY = window.getView().getSize().y / depthHeight_;
+	//	sprite_.setScale(scaleX, scaleY);
 
-		window.draw(sprite_); // depth
-	}
+	//	window.draw(sprite_); // depth
+	//}
 
-	if (overlayBuffer_ != nullptr)
-	{
-		const float scaleX = window.getView().getSize().x / overlayWidth_;
-		const float scaleY = window.getView().getSize().y / overlayHeight_;
-		overlaySprite_.setScale(scaleX, scaleY);
-		window.draw(overlaySprite_); //bodymask and floormask
-	}
+	//if (overlayBuffer_ != nullptr)
+	//{
+	//	const float scaleX = window.getView().getSize().x / overlayWidth_;
+	//	const float scaleY = window.getView().getSize().y / overlayHeight_;
+	//	overlaySprite_.setScale(scaleX, scaleY);
+	//	window.draw(overlaySprite_); //bodymask and floormask
+	//}
 
-	draw_bodies(window);
+	//draw_bodies(window);
 	draw_help_message(window);
 }
 
@@ -486,4 +497,17 @@ void BodyVisualizer::toggle_help()
 void BodyVisualizer::set_help_message(const char* msg)
 {
 	helpMessage_ = msg;
+}
+
+double BodyVisualizer::GetHeight()
+{
+	double height = 0;
+	for (const auto& h : height_vec_)
+	{
+		height += h;
+	}
+	height = height / height_vec_.size();
+	height_vec_.clear();
+
+	return height;
 }

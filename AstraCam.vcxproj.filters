@@ -28,6 +28,12 @@
     <Filter Include="源文件\StreamProcessor">
       <UniqueIdentifier>{3df3e341-6052-49d5-881e-13f64447a72f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\FaceRecognition">
+      <UniqueIdentifier>{e1037c01-9316-4ccd-804a-327b5e8c0334}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\FaceRecognition">
+      <UniqueIdentifier>{dfb946cd-a489-4ca7-a3b7-76fb9c249764}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\AstraCam.cpp">
@@ -42,6 +48,9 @@
     <ClCompile Include="src\StreamProcessor\HeightCal.cpp">
       <Filter>源文件\StreamProcessor</Filter>
     </ClCompile>
+    <ClCompile Include="src\FaceRecognition\FaceGrabber.cpp">
+      <Filter>源文件\FaceRecognition</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="inc\AstraStream\BodyVisualizer.h">
@@ -55,6 +64,18 @@
     </ClInclude>
     <ClInclude Include="inc\StreamProcessor\HeightCal.h">
       <Filter>头文件\StreamProcessor</Filter>
+    </ClInclude>
+    <ClInclude Include="src\FaceRecognition\FaceGrabber.h">
+      <Filter>头文件\FaceRecognition</Filter>
+    </ClInclude>
+    <ClInclude Include="src\FaceRecognition\opencv_includes.h">
+      <Filter>头文件\FaceRecognition</Filter>
+    </ClInclude>
+    <ClInclude Include="src\FaceRecognition\std_includes.h">
+      <Filter>头文件\FaceRecognition</Filter>
+    </ClInclude>
+    <ClInclude Include="src\FaceRecognition\torch_lib_includes.h">
+      <Filter>头文件\FaceRecognition</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

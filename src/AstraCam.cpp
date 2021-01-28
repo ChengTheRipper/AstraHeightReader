@@ -16,7 +16,8 @@
 // Be excellent to each other.
 #include "../inc/AstraStream/BodyVisualizer.h"
 #include "../inc/SFML/sfPen.h"
-
+#include "FaceRecognition/std_includes.h"
+#include "FaceRecognition/FaceGrabber.h"
 
 
 astra::DepthStream configure_depth(astra::StreamReader& reader)
@@ -36,27 +37,24 @@ astra::DepthStream configure_depth(astra::StreamReader& reader)
 	return depthStream;
 }
 
+void astra_init()
+{
+
+}
+
+
+
 int main(int argc, char** argv)
 {
+
 	//初始化相机库
 	astra::initialize();
-	//输入序列号文件的地址，读入序列号，然后进行识别
-	if (argc == 2)
-	{
-		FILE* fp = fopen(argv[1], "rb");
-		char licenseString[1024] = { 0 };
-		fread(licenseString, 1, 1024, fp);
-		orbbec_body_tracking_set_license(licenseString);
 
-		fclose(fp);
-	}
-	else
-	{
-		const char* licenseString = "<INSERT LICENSE KEY HERE>";
-		orbbec_body_tracking_set_license(licenseString);
-	}
+	const char* licenseString = "<INSERT LICENSE KEY HERE>";
+	orbbec_body_tracking_set_license(licenseString);
+
 	//生成输出窗口，估计跟namedWindow差不多的用法
-	sf::RenderWindow window(sf::VideoMode(1280, 960), "Simple Body Viewer");
+	//sf::RenderWindow window(sf::VideoMode(1280, 960), "Simple Body Viewer");
 
 #ifdef _WIN32
 	auto fullscreenStyle = sf::Style::None;
@@ -64,10 +62,10 @@ int main(int argc, char** argv)
 	auto fullscreenStyle = sf::Style::Fullscreen;
 #endif
 	//获取全屏模式，由sf库查询显卡和显示器支持的全屏模式，返回一个列表，第一个模式是最好的,然后依次递减
-	const sf::VideoMode fullScreenMode = sf::VideoMode::getFullscreenModes()[0];
-	//窗口模式大小
-	const sf::VideoMode windowedMode(1280, 960);
-	bool isFullScreen = false;
+	//const sf::VideoMode fullScreenMode = sf::VideoMode::getFullscreenModes()[0];
+	////窗口模式大小
+	//const sf::VideoMode windowedMode(1280, 960);
+	//bool isFullScreen = false;
 
 	//这个库教程上提示了很浅显易懂的比喻，旧式的电影放映机
 	/*
@@ -78,6 +76,7 @@ int main(int argc, char** argv)
 
 	//流组，这个流组由多个不同的，单独的流对象进行组成，
 	//就如同老式胶卷除了电影本身可能还会由如音频等流对象组成。
+
 	astra::StreamSet sensor;
 	//生成一个流读取器(放映机)
 	astra::StreamReader reader = sensor.create_reader();
@@ -113,120 +112,46 @@ int main(int argc, char** argv)
 	// HandPoses includes Joints and Segmentation
 	astra::BodyTrackingFeatureFlags features = astra::BodyTrackingFeatureFlags::HandPoses;
 
-	while (window.isOpen())
+	FaceGrabber fg;
+	fg.StarGrab();
+
+	listener.bheight_ready_ = true;
+	std::cout << "give me a flag.txt" << std::endl;
+	while (true)
 	{
 		astra_update();//让驱动更新当前帧
-		//定义一个系统时间 
-		sf::Event event;
-		//pollEvent包含一个事件队列(？)，会把事件队列最顶端的事件弹出，
-		//把如果发生了任何事件，就会返回真，并且把事件通过引用赋给event;
-		while (window.pollEvent(event))
+
+		fg.GetFrame();
+
+		FILE* fp = NULL;
+		fp = fopen("flag.txt", "r");
+		if (fp)
 		{
-			switch (event.type)//事件类型
+			listener.bheight_ready_ = false;
+			fclose(fp);
+			remove("flag.txt");//清除
+		}
+		if (listener.bheight_ready_ && !listener.height_vec_.empty()) //有身高
+		{
+			while (!fg.GetFace())
 			{
-			case sf::Event::Closed://关闭
-				window.close();
-				break;
-			case sf::Event::KeyPressed://按键按下了
+				fg.GetFrame();
+			}
+			if (fg.GetFace()) //处理脸部
 			{
-				if (event.key.code == sf::Keyboard::C && event.key.control)
-				{
-					window.close();
-				}
-				switch (event.key.code)
-				{
-				case sf::Keyboard::D:
-				{
-					auto oldMode = depthStream.mode();
-					astra::ImageStreamMode depthMode;
-
-					depthMode.set_width(640);
-					depthMode.set_height(400);
-					depthMode.set_pixel_format(astra_pixel_formats::ASTRA_PIXEL_FORMAT_DEPTH_MM);
-					depthMode.set_fps(30);
-
-					depthStream.set_mode(depthMode);
-					auto newMode = depthStream.mode();
-					printf("Changed depth mode: %dx%d @ %d -> %dx%d @ %d\n",
-						oldMode.width(), oldMode.height(), oldMode.fps(),
-						newMode.width(), newMode.height(), newMode.fps());
-					break;
-				}
-				case sf::Keyboard::Escape: //esc键被按下
-					window.close();
-					break;
-				case sf::Keyboard::F:
-					if (isFullScreen)
-					{
-						window.create(windowedMode, "Simple Body Viewer", sf::Style::Default);
-					}
-					else
-					{
-						window.create(fullScreenMode, "Simple Body Viewer", fullscreenStyle);
-					}
-					isFullScreen = !isFullScreen;
-					break;
-				case sf::Keyboard::H:
-					listener.toggle_help();
-					break;
-				case sf::Keyboard::M:
-					depthStream.enable_mirroring(!depthStream.mirroring_enabled());
-					break;
-				case sf::Keyboard::P:
-					listener.toggle_paused();
-					break;
-				case sf::Keyboard::S:
-					if (profile == astra::SkeletonProfile::Full)
-					{
-						profile = astra::SkeletonProfile::Basic;
-						printf("Skeleton Profile: basic\n");
-					}
-					else
-					{
-						profile = astra::SkeletonProfile::Full;
-						printf("Skeleton Profile: full\n");
-					}
-					bodyStream.set_skeleton_profile(profile);
-					break;
-				case sf::Keyboard::T:
-					if (features == astra::BodyTrackingFeatureFlags::Segmentation)
-					{
-						// Joints includes Segmentation
-						features = astra::BodyTrackingFeatureFlags::Joints;
-						printf("Default Body Features: Seg+Body\n");
-					}
-					else if (features == astra::BodyTrackingFeatureFlags::Joints)
-					{
-						// HandPoses includes Joints and Segmentation
-						features = astra::BodyTrackingFeatureFlags::HandPoses;
-						printf("Default Body Features: Seg+Body+Hand\n");
-					}
-					else
-					{
-						// HandPoses includes Joints and Segmentation
-						features = astra::BodyTrackingFeatureFlags::Segmentation;
-						printf("Default Body Features: Seg\n");
-					}
-					bodyStream.set_default_body_features(features);
-					break;
-				case sf::Keyboard::Space:
-					listener.toggle_overlay();//画出掩膜
-					break;
-				default:
-					break;
-				}
-				break;
+				fg.CleanDisk();
+				fg.ShowROIFace();
+				cv::waitKey(1);
+				fg.WritePic2Disk();
 			}
-			default:
-				break;
-			}
+			//写身高
+			fp = fopen("height.txt", "w+");
+			if (fp == NULL)
+				return -1;
+			fprintf(fp, "%lf\n", listener.GetHeight());
+			fclose(fp);
 		}
 
-		// clear the window with black color
-		window.clear(sf::Color::Black);
-
-		listener.draw_to(window);
-		window.display();
 	}
 
 	astra::terminate();
